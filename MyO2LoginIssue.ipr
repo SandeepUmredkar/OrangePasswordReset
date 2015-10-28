@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="Javac" />
+    <resourceExtensions>
+      <entry name=".+\.(properties|xml|html|dtd|tld)" />
+      <entry name=".+\.(gif|png|jpeg|jpg)" />
+    </resourceExtensions>
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.groovy" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="CopyrightManager" default="" />
+  <component name="DependencyValidationManager">
+    <option name="SKIP_IMPORT_STATEMENTS" value="false" />
+  </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="GradleUISettings">
+    <setting name="root" />
+  </component>
+  <component name="GradleUISettings2">
+    <setting name="root" />
+  </component>
+  <component name="IdProvider" IDEtalkID="11DA1DB66DD62DDA1ED602B7079FE97C" />
+  <component name="JRebel Project data">
+    <option name="privateKey" value="3082025c020100028181009bf4893d57dafe9cca7ffc1f2b219343df9152be48134cc6881f5671ac7f45a0427409744dfcfbb6ddcfc251bfabac394d781687a36d08b4cb26628bce019367feb9c494a11f487f3d60b0f962ec449c95bb5e3c31eb7f10d7b77f0f7bc4fa749e89a584952713e2a6e80872786ef7e29100b1d2381468171c4175d1bb412fbf02030100010281805c0e8b982f2cf0d062640bd1e626ca83ed0b1e397dd80ea0be272962ae3cee3f7c1a7c9e2f8ede9281fa2a2d1123e7e4674b34995a29795326fb807e1fdb2443f2a5d32eab0d2e640fae71c45367c7a01d6c693f52be6e34357e86260392affc6a0073807df8f6d8d5275a7714fbc57d4e1e19c4ba0cdacc38d08a8e7a4efbe1024100ffc2250ec80633a7c0a73490a069b0d599a86beeaaf88ba6d3e0da7d15bfe927497a650c9699825e9bbb5a8798be7d209aadb540e4e431577edbc4220e9bca8f0241009c1a4100471f5502b3080d9ea386a74959a12589a5cd3b2badfd9f630316e0dab3fef15e97d1b0d172fb9b2ac5182ab462b5da83d0282e6074fdf625099e9fd1024039f2c234bc2b738ec1bee0d118177a629b4326d957d1a2cab4dd108420e66fac6020a43e9aecc3362e70dfcd33558dc25269a354c5c7d24a31cb178063f0f68f024029b2919e636129321964934ec6db971feec32ee5bfd63c72047df4ef5bc9e6b244d65adf2baaa592ad262c6296574840fb051ca38d1cce969169ad30638b6da1024100b6a6e1a7fbb7c0e20f6447b07f04c81394b8501156ee02e77ea972e39f50f0b5b542ff8ce4c701a0803e8e019e5ca36c898b8e2f70f506e3f8b46a60636d9342" />
+    <option name="publicKey" value="308189028181009bf4893d57dafe9cca7ffc1f2b219343df9152be48134cc6881f5671ac7f45a0427409744dfcfbb6ddcfc251bfabac394d781687a36d08b4cb26628bce019367feb9c494a11f487f3d60b0f962ec449c95bb5e3c31eb7f10d7b77f0f7bc4fa749e89a584952713e2a6e80872786ef7e29100b1d2381468171c4175d1bb412fbf0203010001" />
+  </component>
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" />
+    <option name="OPTION_SCOPE" value="protected" />
+    <option name="OPTION_HIERARCHY" value="true" />
+    <option name="OPTION_NAVIGATOR" value="true" />
+    <option name="OPTION_INDEX" value="true" />
+    <option name="OPTION_SEPARATE_INDEX" value="true" />
+    <option name="OPTION_DOCUMENT_TAG_USE" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_VERSION" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="true" />
+    <option name="OPTION_DEPRECATED_LIST" value="true" />
+    <option name="OTHER_OPTIONS" value="" />
+    <option name="HEAP_SIZE" />
+    <option name="LOCALE" />
+    <option name="OPEN_IN_BROWSER" value="true" />
+  </component>
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MyO2LoginIssue.iml" filepath="$PROJECT_DIR$/MyO2LoginIssue.iml" />
+    </modules>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+          <settings />
+        </UIState>
+      </state>
+      <state key="Copyright.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+        </UIState>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl>
+              <option name="proportions">
+                <list>
+                  <option value="0.2" />
+                </list>
+              </option>
+            </SplitterProportionsDataImpl>
+          </splitter-proportions>
+          <last-edited>1.6</last-edited>
+        </UIState>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+          <settings />
+        </UIState>
+      </state>
+    </states>
+  </component>
+</project>

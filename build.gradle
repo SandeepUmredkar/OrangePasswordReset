@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'application'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'MyLoginIssueResolver'
+    }
+}
+mainClassName = "com.o2.myo2.LoginIssueUtility"
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile "org.mongodb:mongodb-driver:3.0.3"
+    compile "org.codehaus.jackson:jackson-mapper-asl:1.9.13"
+}
+sourceSets.main.resources.srcDirs =['src/main/resources']
+
+applicationDistribution.from( files('application.properties','resultOrange','recovery.log','impactedUsers')) {
+    into( 'bin/' )
+}
