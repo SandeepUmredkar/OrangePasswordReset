@@ -34,55 +34,25 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/MyO2LoginIssue/lib/mongodb-driver-core-3.0.3.jar" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/outputFileStates.bin" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/taskArtifacts.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/o2/myo2/DBConnector.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/o2/myo2/LoginIssueController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/o2/myo2/LoginIssueRepository.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/o2/myo2/LoginIssueResolverUtility.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/o2/myo2/LoginIssueService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/o2/myo2/LoginIssueUsersRecoveryUtility.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/o2/myo2/LoginIssueUsersRemoverUtility.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/o2/myo2/LoginIssueUtility.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/MyO2LoginIssue/bin/MyO2LoginIssue.bat" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/scripts/MyO2LoginIssue.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyO2LoginIssue.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyO2LoginIssue.ipr" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyO2LoginIssue.iws" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/MyO2LoginIssue/bin/MyO2LoginIssue" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/scripts/MyO2LoginIssue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/o2/myo2/User.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application.properties" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/MyO2LoginIssue/bin/application.properties" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/MyO2LoginIssue/application.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/bson_2_13_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.gradle" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/2.5/taskArtifacts/cache.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/errorWhileRecovery.log" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/MyO2LoginIssue/bin/errorWhileRecovery.log" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/impactedUsers123" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/impactedUsers" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/MyO2LoginIssue/bin/impactedUsers" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/impactedUsers" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/outputFileForTest" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/recovery.log" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/MyO2LoginIssue/bin/recovery.log" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/recovery.log" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/MyO2LoginIssue/recovery.log" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/recovery.log" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resultOrange" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/distributions/MyO2LoginIssue/bin/resultOrange" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/resultOrange" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/MyO2LoginIssue/resultOrange" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/resultOrange" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MyO2LoginIssue.iws" />
@@ -748,6 +718,13 @@
       <option name="number" value="Default" />
       <updated>1438151344758</updated>
     </task>
+    <task id="LOCAL-00001" summary="[SU] - Code">
+      <created>1446033147558</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1446033147558</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -773,6 +750,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7455717" sideWeight="0.50278884" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32850242" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.77133656" sideWeight="0.49083665" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -785,7 +763,6 @@
       <window_info id="Palette " active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40257648" sideWeight="0.49721116" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.77133656" sideWeight="0.49083665" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4830918" sideWeight="0.4812749" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -832,6 +809,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="[SU] - Code" />
+    <option name="LAST_COMMIT_MESSAGE" value="[SU] - Code" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
