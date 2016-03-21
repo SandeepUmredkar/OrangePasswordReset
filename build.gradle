@@ -4,19 +4,24 @@ apply plugin: 'idea'
 apply plugin: 'application'
 jar {
     manifest {
-        attributes 'Implementation-Title': 'MyLoginIssueResolver'
+        attributes 'Implementation-Title': 'PasswordResetUtility'
     }
 }
-mainClassName = "com.o2.myo2.LoginIssueUtility"
+mainClassName = "com.o2.myo2.PasswordResetUtility"
 repositories {
     mavenCentral()
 }
 dependencies {
-    compile "org.mongodb:mongodb-driver:3.0.3"
     compile "org.codehaus.jackson:jackson-mapper-asl:1.9.13"
-}
-sourceSets.main.resources.srcDirs =['src/main/resources']
+    compile "org.apache.httpcomponents:httpclient:4.4.1"
+    compile "com.google.code.gson:gson:2.3.1"
+    compile "org.json:json:20151123"
 
-applicationDistribution.from( files('application.properties','resultOrange','recovery.log','impactedUsers')) {
-    into( 'bin/' )
+    testCompile "junit:junit:4.12"
+
+}
+sourceSets.main.resources.srcDirs = ['src/main/resources']
+
+applicationDistribution.from(files('application.properties', 'UidsForPasswordToReset')) {
+    into('bin/')
 }

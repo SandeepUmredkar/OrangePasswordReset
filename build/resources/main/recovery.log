@@ -1,2 +1,0 @@
-user={ "_class" : "uk.co.o2.person.dao.entity.AssetEntity" , "uid" : "13000000000002293709" , "rawAssetValue" : "+447518076953" , "normalisedAssetValue" : "+447518076953" , "assetType" : "PAYMMBB" , "createdBy" : "orange" , "createdOn" : { "$date" : "2015-07-15T11:51:53.262Z"}}
-user={ "_class" : "uk.co.o2.person.dao.entity.AssetEntity" , "uid" : "13000000000012982638" , "rawAssetValue" : "+447525166490" , "normalisedAssetValue" : "+447525166490" , "assetType" : "PAYMMBB" , "createdBy" : "orange" , "createdOn" : { "$date" : "2015-03-16T12:26:18.305Z"}}
