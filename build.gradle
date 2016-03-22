@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'application'
+apply plugin: 'eclipse'
 jar {
     manifest {
         attributes 'Implementation-Title': 'PasswordResetUtility'
@@ -16,6 +17,9 @@ dependencies {
     compile "org.apache.httpcomponents:httpclient:4.4.1"
     compile "com.google.code.gson:gson:2.3.1"
     compile "org.json:json:20151123"
+      compile group: 'com.sun.jersey', name: 'jersey-client', version: '1.8'
+    compile group: 'org.json', name: 'json', version: '20140107'
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
 
     testCompile "junit:junit:4.12"
 

@@ -1,4 +1,4 @@
-package com.o2.orange
+/*package com.o2.orange
 
 
 import org.junit.Before;
@@ -30,3 +30,4 @@ class PasswordResetUtilitySpecs {
         passwordResetController.resetPassword(applicationProperties.getProperty("fileForUidsForPasswordReset"));
     }
 }
+*/

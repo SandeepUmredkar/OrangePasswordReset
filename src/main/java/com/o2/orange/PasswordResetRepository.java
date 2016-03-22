@@ -1,21 +1,37 @@
 package com.o2.orange;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.sun.xml.internal.messaging.saaj.util.Base64;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
+
+import javax.ws.rs.core.MultivaluedMap;
+
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.xml.internal.messaging.saaj.util.Base64;
 
 
 public class PasswordResetRepository {
@@ -24,16 +40,24 @@ public class PasswordResetRepository {
     FileOutputStream outputFile;
     PrintWriter outputFileWriter;
     private Properties applicationProperties = new Properties();
+    FileOutputStream successFullResetUids ;
+    FileOutputStream FailedResetUids ;
+    PrintWriter successFileWriter;
+    PrintWriter failedFileWriter;
 
     public PasswordResetRepository() throws IOException {
-        client = new DefaultHttpClient();
         String propFileName = "application.properties";
         file = new File(propFileName).getAbsoluteFile();
         InputStream inputStream = new FileInputStream(file);
+        applicationProperties.load(inputStream);
         String outputFilePath = applicationProperties.getProperty("UidPasswordResetExceptionLogFilePath");
         outputFile = new FileOutputStream(outputFilePath, false);
         outputFileWriter = new PrintWriter(outputFile);
-        applicationProperties.load(inputStream);
+       String successFullResetUidsPath = applicationProperties.getProperty("successFullResetUidsPath");
+       String failedResetUidsPath = applicationProperties.getProperty("failedResetUidsPath");
+       successFileWriter = new PrintWriter(successFullResetUidsPath);
+       failedFileWriter = new PrintWriter(failedResetUidsPath);
+       // applicationProperties.load(inputStream);
     }
 
     public List<String> getUidsForPasswordReset(String filePathForUidsListToResetPasswword) throws FileNotFoundException {
@@ -47,7 +71,7 @@ public class PasswordResetRepository {
         return uidsForPasswordReset;
     }
 
-    public List<String> resetPassword(List<String> uidsForPasswordReset) throws IOException, JSONException {
+    public void resetPassword(List<String> uidsForPasswordReset) throws IOException, JSONException {
         String spooferUsername = applicationProperties.getProperty("spoofer_username");
         String spooferPassword = applicationProperties.getProperty("spoofer_password");
         String authCodeUrl = applicationProperties.getProperty("authCodeUrl");
@@ -57,88 +81,141 @@ public class PasswordResetRepository {
         for (String uidForPasswordReset : uidsForPasswordReset) {
             String authCode = getAuthCode(spooferUsername, spooferPassword, authCodeUrl, uidForPasswordReset);
             String accessToken = getAccessToken(authCode, accessTokenUrl, uidForPasswordReset);
-            generateResetPassword(accessToken, uidForPasswordReset, passwordResetUrl);
+            boolean response = generateResetPassword(accessToken, uidForPasswordReset, passwordResetUrl);
+            if(response)
+            {
+            	successFileWriter.println(uidForPasswordReset);
+            }
+            else
+            {
+            	failedFileWriter.println(uidForPasswordReset);
+            }
         }
-        return null;
+        
+        outputFileWriter.flush();
+        successFileWriter.flush();
+        failedFileWriter.flush();
+        failedFileWriter.close();
+        successFileWriter.close();
+        outputFileWriter.close();
 
     }
-
+    
     private String getAuthCode(String spooferUsername, String spooferPassword, String authCodeUrl, String uidForPasswordReset) throws JSONException, UnsupportedEncodingException {
-        HttpPost requestForAuthCode = new HttpPost(authCodeUrl);
-        requestForAuthCode.setHeader("Authorization", getAuthorizationHeader());
-        JSONObject jsonForAuthCode = new JSONObject();
-        jsonForAuthCode.put("spoofer_username", spooferUsername);
-        jsonForAuthCode.put("spoofer_password", spooferPassword);
-        jsonForAuthCode.put("uid", uidForPasswordReset);
-        StringEntity stringEntityForAuthCode = new StringEntity(jsonForAuthCode.toString());
-        requestForAuthCode.setEntity(stringEntityForAuthCode);
-        try {
-            HttpResponse responseForAuthCode = client.execute(requestForAuthCode);
-            int statusCodeForAuthCode = responseForAuthCode.getStatusLine().getStatusCode();
+    	String authCode = null;
+    	Client client = Client.create();
+		WebResource webResource = client.resource(authCodeUrl); 
+		  JSONObject jsonForAuthCode = new JSONObject();
+	        jsonForAuthCode.put("spoofer_username", spooferUsername);
+	        jsonForAuthCode.put("spoofer_password", spooferPassword);
+	        jsonForAuthCode.put("uid", uidForPasswordReset);
+	        try {
+    	ClientResponse responseForAuthCode = webResource
+    				.accept("application/json")
+    				.header("Content-Type","application/json")
+    				.header("Authorization",getAuthorizationHeader())
+    				.post(ClientResponse.class, jsonForAuthCode.toString());
+    		int statusCodeForAuthCode = responseForAuthCode.getStatus();
+    		MultivaluedMap<String, String> responseHeader = responseForAuthCode.getHeaders();
+    		String apiGwTransId = responseHeader.get("Apigw-Transaction-Id") != null ? responseHeader.get("Apigw-Transaction-Id").toString() : "Apigw-Transaction-Id is null" ;
+  
             if (!((statusCodeForAuthCode + "").startsWith("2"))) {
                 outputFileWriter.println("AuthCode");
-                outputFileWriter.println(uidForPasswordReset + "=" + statusCodeForAuthCode);
-                return "";
+                outputFileWriter.println(uidForPasswordReset + "=" + statusCodeForAuthCode + " apiGwTransId" + "=" + apiGwTransId);
+                return authCode;
             }
-            Gson gson = new GsonBuilder().create();
-            AuthCode authCode = gson.fromJson(responseForAuthCode.getEntity().toString(), AuthCode.class);
+            AuthCode authCodeObject = new ObjectMapper().readValue(responseForAuthCode.getEntity(String.class),  AuthCode.class);
+            authCode = authCodeObject.getAuth_code();
+            outputFileWriter.println(uidForPasswordReset + "=" + statusCodeForAuthCode + " apiGwTransId" + "=" + apiGwTransId  + "generated Auth code" + "=" + authCode);
         } catch (Exception authCodeException) {
             outputFileWriter.println("AuthCode");
             outputFileWriter.println(uidForPasswordReset + "=" + authCodeException.getMessage());
         }
 
-        return "";
+        return authCode;
     }
-
+    
+   
+    
+    
     private String getAccessToken(String authCode, String accessTokenUrl, String uidForPasswordReset) throws JSONException, UnsupportedEncodingException {
-        HttpPost requestForAccessToken = new HttpPost(accessTokenUrl);
-        requestForAccessToken.setHeader("Authorization", getAuthorizationHeader());
-        JSONObject jsonForAccessToken = new JSONObject();
-        jsonForAccessToken.put("code", authCode);
-        jsonForAccessToken.put("grant_type", "authorization_code");
-        jsonForAccessToken.put("scope", " [\"openid\",\"profile\",\"email\",\"phone\",\"legacy\"]");
-        StringEntity stringEntityForAccessToken = new StringEntity(jsonForAccessToken.toString());
-        requestForAccessToken.setEntity(stringEntityForAccessToken);
-        try {
-            HttpResponse responseForAccessToken = client.execute(requestForAccessToken);
-            int statusCodeForAccessToken = responseForAccessToken.getStatusLine().getStatusCode();
+    	
+    	
+    	String accessToken = null;
+    	Client client = Client.create();
+		WebResource webResource = client.resource(accessTokenUrl);
+		JSONArray accessTokenInputArray = new JSONArray();
+		accessTokenInputArray.put("openid");
+		accessTokenInputArray.put("profile");
+		accessTokenInputArray.put("email");
+		accessTokenInputArray.put("phone");
+		accessTokenInputArray.put("legacy");
+		
+		JSONObject jsonForAccessToken = new JSONObject();
+		  jsonForAccessToken.put("code", authCode);
+	        jsonForAccessToken.put("grant_type", "authorization_code");
+	        jsonForAccessToken.put("scope",accessTokenInputArray );
+	        try {
+    	ClientResponse requestForAccessToken = webResource
+    				.accept("application/json")
+    				.header("Content-Type","application/json")
+    				.header("Authorization",getAuthorizationHeader())
+    				.post(ClientResponse.class, jsonForAccessToken.toString());
+    		int statusCodeForAccessToken = requestForAccessToken.getStatus();
+    		MultivaluedMap<String, String> responseHeader = requestForAccessToken.getHeaders();
+    		String apiGwTransId = responseHeader.get("Apigw-Transaction-Id") != null ? responseHeader.get("Apigw-Transaction-Id").toString() : "Apigw-Transaction-Id is null" ;
+  
             if (!((statusCodeForAccessToken + "").startsWith("2"))) {
                 outputFileWriter.println("AccessToken");
-                outputFileWriter.println(uidForPasswordReset + "=" + statusCodeForAccessToken);
+                outputFileWriter.println(uidForPasswordReset + "=" + statusCodeForAccessToken  + " apiGwTransId" + "=" + apiGwTransId);
                 return "";
             }
-            Gson gson = new GsonBuilder().create();
-            AccessToken accessToken = gson.fromJson(responseForAccessToken.getEntity().toString(), AccessToken.class);
+            AccessToken accessTokenObejct = new ObjectMapper().readValue(requestForAccessToken.getEntity(String.class), AccessToken.class);
+            accessToken = accessTokenObejct.getAccess_token();
+            outputFileWriter.println(uidForPasswordReset + "=" + statusCodeForAccessToken  + " apiGwTransId" + "=" + apiGwTransId + "generated access token " + "=" + accessToken);
         } catch (Exception accessTokenException) {
             outputFileWriter.println("AccessToken");
             outputFileWriter.println(uidForPasswordReset + "=" + accessTokenException.getMessage());
         }
-        return "";
+        return accessToken;
     }
 
-    private String generateResetPassword(String accessToken, String uidForPasswordReset, String passwordResetUrl) throws JSONException, UnsupportedEncodingException {
-        HttpPost requestForRestPassword = new HttpPost(passwordResetUrl);
-        requestForRestPassword.setHeader("Authorization", "Bearer " + accessToken);
-        JSONObject jsonForResetPassword = new JSONObject();
-        jsonForResetPassword.put("password", GenerateRandomPassword.generateRandomPassword(12));
-        StringEntity stringEntityForResetPassword = new StringEntity(jsonForResetPassword.toString());
-        requestForRestPassword.setEntity(stringEntityForResetPassword);
-        try {
-            HttpResponse responseForResetPassword = client.execute(requestForRestPassword);
-            int statusCodeForPasswordReset = responseForResetPassword.getStatusLine().getStatusCode();
+    private boolean generateResetPassword(String accessToken, String uidForPasswordReset, String passwordResetUrl) throws JSONException, UnsupportedEncodingException {
+    	
+    	Client client = Client.create();
+		WebResource webResource = client.resource(passwordResetUrl);
+		JSONObject jsonForResetPassword = new JSONObject();
+		 jsonForResetPassword.put("password", GenerateRandomPassword.generateRandomPassword(12));
+	        try {
+    	ClientResponse requestForAccessToken = webResource
+    				.accept("application/json")
+    				.header("Content-Type","application/json")
+    				.header("Authorization","Bearer " + accessToken)
+    				.post(ClientResponse.class, jsonForResetPassword.toString());
+    		int statusCodeForPasswordReset = requestForAccessToken.getStatus();
+    		MultivaluedMap<String, String> responseHeader = requestForAccessToken.getHeaders();
+      		String apiGwTransId = responseHeader.get("Apigw-Transaction-Id") != null ? responseHeader.get("Apigw-Transaction-Id").toString() : "Apigw-Transaction-Id is null" ;
             if (!((statusCodeForPasswordReset + "").startsWith("2"))) {
                 outputFileWriter.println("Password Reset");
-                outputFileWriter.println(uidForPasswordReset + "=" + statusCodeForPasswordReset);
+                outputFileWriter.println(uidForPasswordReset + "=" + statusCodeForPasswordReset + " apiGwTransId" + "=" + apiGwTransId);
+                return false;
             }
+            else
+            {
+            	outputFileWriter.println(uidForPasswordReset + "=" + statusCodeForPasswordReset + " apiGwTransId" + "=" + apiGwTransId + "- Successfully called reset Api for UID");
+            	return true; 
+            }
+            
+            	
         } catch (Exception passwordResetException) {
             outputFileWriter.println("Password Reset");
             outputFileWriter.println(uidForPasswordReset + "=" + passwordResetException.getMessage());
         }
-        return "";
+        return false;
     }
 
     private String getAuthorizationHeader() {
-        String username = applicationProperties.getProperty("username");
+        String username = applicationProperties.getProperty("userName");
         String password = applicationProperties.getProperty("password");
         String header = username + ":" + password;
         byte[] unencodedByteArray = header.getBytes();
