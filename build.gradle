@@ -3,12 +3,24 @@ apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'application'
 apply plugin: 'eclipse'
-jar {
+
+
+version = '1.0'
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+//create a single Jar with all dependencies
+task createJar(type: Jar) {
     manifest {
-        attributes 'Implementation-Title': 'PasswordResetUtility'
+        attributes 'Implementation-Title': 'Orange password rest',
+                'Implementation-Version': version,
+                'Main-Class': 'com.o2.orange.PasswordResetUtility'
     }
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
-mainClassName = "com.o2.myo2.PasswordResetUtility"
+
 repositories {
     mavenCentral()
 }

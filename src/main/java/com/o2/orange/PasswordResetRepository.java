@@ -15,23 +15,16 @@ import java.util.Scanner;
 
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.xml.internal.messaging.saaj.util.Base64;
+import org.apache.commons.codec.binary.Base64;
 
 
 public class PasswordResetRepository {
@@ -219,7 +212,7 @@ public class PasswordResetRepository {
         String password = applicationProperties.getProperty("password");
         String header = username + ":" + password;
         byte[] unencodedByteArray = header.getBytes();
-        byte[] encodedByteArray = Base64.encode(unencodedByteArray);
+        byte[] encodedByteArray = Base64.encodeBase64(unencodedByteArray);
         String encodedString = new String(encodedByteArray);
         return "Basic " + encodedString;
     }
