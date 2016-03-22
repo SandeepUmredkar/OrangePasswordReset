@@ -27,8 +27,6 @@ repositories {
 dependencies {
     compile "org.codehaus.jackson:jackson-mapper-asl:1.9.13"
     compile "org.apache.httpcomponents:httpclient:4.4.1"
-    compile "com.google.code.gson:gson:2.3.1"
-    compile "org.json:json:20151123"
       compile group: 'com.sun.jersey', name: 'jersey-client', version: '1.8'
     compile group: 'org.json', name: 'json', version: '20140107'
     compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
